@@ -1,5 +1,4 @@
 # cli_tools
-
 from collections import deque
 import sys
 import struct
@@ -12,35 +11,27 @@ import cv2
 import math
 import datetime
 import itertools 
-
 scale = 0.5
 fileinput =  sys.argv[1]
 bytes_read = open(fileinput, "rb").read()
 poly_line_index = 0
-
 height = int(1000 * scale)
 width = int(1800 * scale)
 frame = np.ones((height,width,3), np.uint8)
 output_size = (width, height)
-
 codec = cv2.VideoWriter_fourcc('M','J','P','G')
 fps = 15
 videof = cv2.VideoWriter()
 success = videof.open('cli.avi',codec,fps,output_size,True) 
-
 ASCII = True
 Binary = False
-
 dq1 = deque(['.','.','H','E','A','D','E','R','E','N','D'])
 dq2 = deque(['$','$','H','E','A','D','E','R','E','N','D'])
-
 l = []
 l1 = []
 poly_lines = []
 directions = []
-
 iterator = iter(bytes_read)
-
 try:
     b = iterator.next()
     while True:
@@ -76,7 +67,6 @@ try:
                 videof.write(frame)
                 poly_lines = []
                 #print "0x7F new layer long found at z height = " + str(zheight) 
-
             if((intb == 130) and (nextb == 0)):
                 z1 = iterator.next()
                 z2 = iterator.next()
@@ -119,8 +109,6 @@ try:
                 poly_line = np.array( poly_line, dtype=np.int32 )
                 poly_lines.append(poly_line)  
 		b = iterator.next()
-		
-
         if(ASCII):   
             dq1.append(b)
             dq1.popleft()
