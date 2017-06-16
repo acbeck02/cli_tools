@@ -71,6 +71,7 @@ try:
                 videof.write(frame)
                 poly_lines = []
                 #print "0x7F new layer long found at z height = " + str(zheight) 
+		
             if((intb == 130) and (nextb == 0)):
                 z1 = iterator.next()
                 z2 = iterator.next()
